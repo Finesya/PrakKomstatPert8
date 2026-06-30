@@ -24,3 +24,19 @@ usethis::use_testthat()
 
 # Setup pkgdown
 usethis::use_pkgdown()
+
+# Generate dokumen
+devtools::document()
+
+# Testing
+devtools::test()
+
+# Checking
+devtools::check()
+usethis::use_build_ignore(c("install.R", "setup.R", "praktikum-komstat-pert8.Rmd"))
+
+# Processing Vignettes
+devtools::build_vignettes()
+
+# Checking Vignettes
+browseVignettes("PrakKomstatPert8")

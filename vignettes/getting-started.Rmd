@@ -1,8 +1,10 @@
 ---
-title: "getting-started"
+title: "Getting Started with PrakKomstatPert8"
+author: "Finesya Aura Nadifa"
+date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{getting-started}
+  %\VignetteIndexEntry{Getting Started with PrakKomstatPert8}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -14,6 +16,133 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+# Introduction
+
+PrakKomstatPert8 is an R package developed to evaluate the assumptions of linear regression models. Before interpreting the coefficients of a regression model, it is important to verify that the underlying assumptions are satisfied.
+
+The package provides several diagnostic functions that perform:
+
+- Normality test of residuals
+- Multicollinearity assessment
+- Heteroscedasticity test
+- Detection of influential observations
+- Overall diagnostic summary
+
+This vignette demonstrates the complete workflow for using PrakKomstatPert8.
+
+# Loading the Package
+
+```{r}
 library(PrakKomstatPert8)
 ```
+
+# Example Dataset
+
+This vignette uses the built-in `mtcars` dataset available in R.
+
+```{r}
+head(mtcars)
+```
+
+The response variable is:
+
+- `mpg` (Miles per Gallon)
+
+Predictor variables:
+
+- `wt` (Weight)
+- `hp` (Horsepower)
+- `disp` (Displacement)
+
+# Fitting a Linear Regression Model
+
+A linear regression model is fitted before performing diagnostic checks.
+
+```{r}
+fit <- lm(mpg ~ wt + hp + disp, data = mtcars)
+summary(fit)
+```
+
+# Residual Normality
+
+Residual normality is evaluated using the Shapiro–Wilk test.
+
+```{r}
+normality_check(fit)
+```
+
+### Interpretation
+
+- **p-value > 0.05** indicates residuals are approximately normally distributed.
+- **p-value ≤ 0.05** indicates evidence against normality.
+
+# Multicollinearity
+
+Multicollinearity occurs when predictor variables are highly correlated. 
+PrakKomstatPert8 computes the Variance Inflation Factor (VIF) manually.
+
+```{r}
+multicol_check(fit)
+```
+
+### Interpretation
+
+- VIF < 5 : Low multicollinearity
+- 5 ≤ VIF < 10 : Moderate multicollinearity
+- VIF ≥ 10 : High multicollinearity
+
+# Heteroscedasticity
+
+The Breusch–Pagan test is used to detect heteroscedasticity.
+
+```{r}
+hetero_check(fit)
+```
+
+### Interpretation
+
+- p-value > 0.05 : Homoscedasticity assumption is satisfied.
+- p-value ≤ 0.05 : Evidence of heteroscedasticity.
+
+# Influential Observations
+
+Cook's Distance is used to identify influential observations.
+
+```{r}
+outlier_check(fit)
+```
+
+### Interpretation
+
+Observations with Cook's Distance greater than the threshold are considered influential and may have a strong impact on the fitted regression model.
+
+# Overall Diagnostic Summary
+
+The package also provides a concise summary of all diagnostic tests.
+
+```{r}
+model_diagnostics(fit)
+```
+
+This function summarizes:
+
+- Normality
+- Homoscedasticity
+- Multicollinearity
+- Influential observations
+
+making it easier to evaluate the overall adequacy of the regression model.
+
+# Conclusion
+
+PrakKomstatPert8 provides an easy-to-use workflow for evaluating the assumptions of linear regression models.
+
+The package includes functions for:
+
+- Residual normality assessment
+- Multicollinearity detection
+- Heteroscedasticity testing
+- Influential observation detection
+- Overall diagnostic summary
+
+These diagnostic tools help users assess whether a regression model satisfies the assumptions required for reliable statistical inference.
