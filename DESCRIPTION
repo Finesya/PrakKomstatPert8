@@ -1,16 +1,24 @@
 Package: PrakKomstatPert8
-Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.0
-Authors@R: c(
+Title: Diagnostic Tools for Linear Regression Models
+Version: 0.0.0.9000
+Authors@R: 
     person(
-      "Jane", "Doe",
-      email = "jane@example.com",
+      "Finesya", "Aura Nadifa",
+      email = "24611004@students.uii.ac.id",
       role = c("aut", "cre")
     )
-  )
-Description: More about what it does (maybe more than one line).
-    Continuation lines should be indented.
+Description: Provides diagnostic tools for evaluating statistical
+    models. The package includes procedures for assessing assumptions,
+    normality, and other diagnostic checks used in the practicum.
 License: MIT + file LICENSE
 Encoding: UTF-8
-LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+Suggests: 
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0)
+VignetteBuilder: knitr
+Config/testthat/edition: 3
+URL: https://github.com/Finesya/PrakKomstatPert8
+BugReports: https://github.com/Finesya/PrakKomstatPert8/issues
